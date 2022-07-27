@@ -39,7 +39,7 @@ fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
 
     if (currentNodeFromList1 == null)
         mergeLists(currentNode, currentNodeFromList2)
-    else if (currentNodeFromList2 == null)
+    else
         mergeLists(currentNode, currentNodeFromList1)
 
     return firstNodeOfResult
