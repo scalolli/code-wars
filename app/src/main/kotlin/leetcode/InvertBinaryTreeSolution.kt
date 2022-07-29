@@ -4,23 +4,32 @@ data class TreeNode(val `val`: Int, var left: TreeNode? = null, var right: TreeN
 
 fun invertTree(root: TreeNode?): TreeNode? {
     val stack = ArrayDeque<TreeNode>()
+    val secondStack = ArrayDeque<TreeNode>()
+    var newRoot: TreeNode? = null
 
     if (root != null) {
-
         stack.add(root)
+        newRoot = TreeNode(root.`val`)
+        secondStack.add(newRoot)
+
         while (stack.isNotEmpty()) {
             val currentNode = stack.removeFirst()
+            val currentNodeForCopiedTree = secondStack.removeFirst()
 
-            val tempNode = currentNode.left
-            currentNode.left = currentNode.right
-            currentNode.right = tempNode
-
-            if (currentNode.right != null)
+            if (currentNode.right != null) {
+                val tempNode = TreeNode(currentNode.right!!.`val`)
+                currentNodeForCopiedTree.left = tempNode
                 stack.add(currentNode.right!!)
-            if (currentNode.left != null)
+                secondStack.add(tempNode)
+            }
+            if (currentNode.left != null) {
+                val tempNode = TreeNode(currentNode.left!!.`val`)
+                currentNodeForCopiedTree.right = tempNode
                 stack.add(currentNode.left!!)
+                secondStack.add(tempNode)
+            }
         }
     }
 
-    return root
+    return newRoot
 }
