@@ -34,4 +34,16 @@ class BinaryTreeTraversalTest {
         val tree = TreeNode(1, left = TreeNode(2), right = TreeNode(3))
         assertEquals(listOf(2, 1, 3), inOrderTraversal(tree))
     }
+
+    @Test
+    fun testPostOrderTraversal() {
+        val tree = TreeNode(1, left = TreeNode(2), right = TreeNode(3))
+        assertEquals(listOf(2, 3, 1), postOrderTraversal(tree))
+    }
+
+    @Test
+    fun testPostOrderTraversalComplexScenario() {
+        val tree = TreeNode(1, left = TreeNode(2, left = TreeNode(4), right = TreeNode(5)), right = TreeNode(3))
+        assertEquals(listOf(4, 5, 2, 3, 1), postOrderTraversal(tree))
+    }
 }
