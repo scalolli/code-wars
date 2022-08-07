@@ -15,4 +15,15 @@ class TrieSolutionTests {
         assertEquals(true, simpleTrie.startsWith("ca"))
         assertEquals(false, simpleTrie.startsWith("t"))
     }
+
+    @Test
+    fun testFindTrieNode() {
+        val simpleTrie = Trie()
+        simpleTrie.insert("can")
+        assertEquals(true, simpleTrie.search("can"))
+        assertEquals(false, simpleTrie.search("cant"))
+        assertEquals(false, simpleTrie.search("basu"))
+        assertEquals(false, simpleTrie.find("ca")?.isEndOfWord)
+        assertEquals(true, simpleTrie.find("can")?.isEndOfWord)
+    }
 }

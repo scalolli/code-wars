@@ -1,8 +1,8 @@
 package leetcode
 
 class Trie {
-    private val edges = mutableMapOf<Char, Trie>()
-    private var isEndOfWord: Boolean = false
+    val edges = mutableMapOf<Char, Trie>()
+    var isEndOfWord: Boolean = false
 
     fun insert(word: String) {
         var currentNode: Trie? = this
@@ -42,4 +42,18 @@ class Trie {
 
         return true
     }
+
+    fun find(word: String): Trie? {
+        var currentNode: Trie? = this
+        for (char in word) {
+            if (currentNode?.edges?.containsKey(char) == false) {
+                return null
+            }
+
+            currentNode = currentNode?.edges?.get(char)
+        }
+
+        return currentNode
+    }
+
 }
