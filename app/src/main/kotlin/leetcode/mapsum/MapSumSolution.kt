@@ -1,7 +1,7 @@
 package leetcode.mapsum
 
 
-class MapSum() {
+class MapSum {
     val edges = mutableMapOf<Char, MapSum>()
     private var isEndOfWord: Boolean = false
     var weight: Int? = null
