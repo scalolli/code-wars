@@ -23,12 +23,12 @@ class MaximumSubArraySolutionTest {
     }
 
     @Test
-    fun testFailingTest() {
+    fun testWithAllNegativesWithSmallestSecond() {
         assertEquals(-1, maxSubArray(intArrayOf(-1, -2)))
     }
 
     @Test
-    fun testFailingTest2() {
+    fun testWithAllNegativesWithSmallestFirst() {
         assertEquals(-1, maxSubArray(intArrayOf(-2, -1)))
     }
 
