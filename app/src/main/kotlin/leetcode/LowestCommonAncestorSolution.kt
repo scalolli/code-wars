@@ -1,26 +1,27 @@
 package leetcode
 
 object LowestCommonAncestorSolution {
-    fun lowestCommonAncestor(treeNode: TreeNode, leftSubTree: TreeNode, rightSubtree: TreeNode): TreeNode? {
-        val pathToLeftSubTree = getPathToNode(treeNode, leftSubTree)
-        val pathToRightSubTree = getPathToNode(treeNode, rightSubtree)
+    fun lowestCommonAncestor(root: TreeNode?, p: TreeNode?, q: TreeNode?): TreeNode? {
+        val pathToLeftSubTree = getPathToNode(root, p)
+        val pathToRightSubTree = getPathToNode(root, q)
 
         var i = 0
 
         while (i < pathToLeftSubTree.size && i < pathToRightSubTree.size) {
-            if (pathToLeftSubTree[i] == pathToRightSubTree[i])
+            if (pathToLeftSubTree[i] == pathToRightSubTree[i]) {
+                i++
+                continue
+            } else
                 break
-
-            i++
         }
 
-        if (i <= pathToLeftSubTree.size - 1)
-            return TreeNode(pathToLeftSubTree[i])
+        if (i <= pathToLeftSubTree.size && i > 0)
+            return pathToLeftSubTree[i - 1]
         else
             return null
     }
 
-    fun getPathToNode(treeNode: TreeNode, leftSubTree: TreeNode): List<Int> {
+    fun getPathToNode(treeNode: TreeNode?, leftSubTree: TreeNode?): List<TreeNode> {
         val stack = ArrayDeque<TreeNode>()
         var currentNode: TreeNode? = treeNode
         var previousNode: TreeNode? = null
@@ -29,7 +30,7 @@ object LowestCommonAncestorSolution {
             if (currentNode != null) {
                 stack.add(currentNode)
 
-                if (currentNode.`val` == leftSubTree.`val`)
+                if (currentNode.`val` == leftSubTree?.`val`)
                     break
 
                 previousNode = currentNode
@@ -39,12 +40,12 @@ object LowestCommonAncestorSolution {
                     previousNode = currentNode
                     currentNode = stack.last().right
                 } else {
-                    stack.removeLast()
+                    previousNode = stack.removeLast()
                 }
             }
         }
 
-        return stack.map { it.`val` }.reversed()
+        return stack.toList()
     }
 
 }

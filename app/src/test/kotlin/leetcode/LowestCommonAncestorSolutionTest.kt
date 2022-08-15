@@ -23,17 +23,17 @@ class LowestCommonAncestorSolutionTest {
     fun testComplexTree() {
         val treeNode = TreeNode(
             6,
-            left = TreeNode(4, left = TreeNode(2), right = TreeNode(5)),
+            left = TreeNode(2, left = TreeNode(0), right = TreeNode(4, left = TreeNode(3), right = TreeNode(5))),
             right = TreeNode(8, left = TreeNode(7), right = TreeNode(9))
         )
 
         assertEquals(
             6,
-            lowestCommonAncestor(treeNode, TreeNode(2), TreeNode(9))?.`val`
+            lowestCommonAncestor(treeNode, TreeNode(2), TreeNode(8))?.`val`
         )
         assertEquals(
-            6,
-            lowestCommonAncestor(treeNode, TreeNode(5), TreeNode(7))?.`val`
+            2,
+            lowestCommonAncestor(treeNode, TreeNode(2), TreeNode(4))?.`val`
         )
         assertEquals(
             8,
@@ -47,17 +47,36 @@ class LowestCommonAncestorSolutionTest {
     }
 
     @Test
-    fun testBasicPath() {
+    fun testBoundary() {
         val leftSubTree = TreeNode(2)
         val rightSubtree = TreeNode(5)
+        val treeNode = TreeNode(6, left = TreeNode(4, left = leftSubTree, right = rightSubtree), right = null)
+
+        assertEquals(
+            null,
+            lowestCommonAncestor(treeNode, TreeNode(10), TreeNode(2))
+        )
+    }
+
+    @Test
+    fun testEmptyTree() {
+
+        assertEquals(
+            null,
+            lowestCommonAncestor(null, TreeNode(10), TreeNode(2))
+        )
+    }
+
+    @Test
+    fun testBasicPath() {
         val treeNode = TreeNode(
             6,
-            left = TreeNode(4, left = leftSubTree, right = rightSubtree),
+            left = TreeNode(4, left = TreeNode(2), right = TreeNode(5)),
             right = TreeNode(8, left = TreeNode(7), right = TreeNode(9))
         )
 
-        assertEquals(listOf(2, 4, 6), getPathToNode(treeNode, leftSubTree))
-        assertEquals(listOf(5, 4, 6), getPathToNode(treeNode, rightSubtree))
-        assertEquals(listOf(8, 6), getPathToNode(treeNode, TreeNode(8)))
+        assertEquals(listOf(6, 4, 2), getPathToNode(treeNode, TreeNode(2)).map { it.`val` })
+        assertEquals(listOf(6, 4, 5), getPathToNode(treeNode, TreeNode(5)).map { it.`val` })
+        assertEquals(listOf(6, 8), getPathToNode(treeNode, TreeNode(8)).map { it.`val` })
     }
 }
