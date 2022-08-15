@@ -1,7 +1,5 @@
 package leetcode
 
-data class TreeNode(val `val`: Int, var left: TreeNode? = null, var right: TreeNode? = null)
-
 fun invertTree(root: TreeNode?): TreeNode? {
     val stack = ArrayDeque<TreeNode>()
     val secondStack = ArrayDeque<TreeNode>()
