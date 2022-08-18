@@ -24,15 +24,3 @@ object TribonacciSolution {
         return nth
     }
 }
-
-// 0, 1, 1, 2, 4, 8, 16, 32, 64
-// 0, 1, 2, 3, 4, 5, 6, 7, 8
-//        var previous = 1
-//        var nth = 1
-//
-//        for (i in 2 until n - 1) {
-//            nth = 2 * previous
-//            previous = nth
-//        }
-//
-//        return nth
