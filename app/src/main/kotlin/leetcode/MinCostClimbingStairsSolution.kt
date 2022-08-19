@@ -17,7 +17,6 @@ object MinCostClimbingStairsSolution {
             copiedCosts[i] = min(copiedCosts[i] + copiedCosts[i + 2], copiedCosts[i] + copiedCosts[i + 1])
         }
 
-
         return min(copiedCosts[0], copiedCosts[1])
     }
 }
