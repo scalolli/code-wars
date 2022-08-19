@@ -1,6 +1,6 @@
 package leetcode
 
-class ListNode(var `val`: Int, var next: ListNode? = null)
+data class ListNode(var `val`: Int, var next: ListNode? = null)
 
 object LinkedListCycleSolution {
     fun hasCycle(head: ListNode?): Boolean {
