@@ -18,10 +18,10 @@ class StringInterleavingSolutionTest {
 
     @Test
     fun stringsWithSingleCharacterEach() {
-//        assertTrue(isInterleaveString("a", "b", "ab"))
-//        assertTrue(isInterleaveString("a", "b", "ba"))
-//        assertFalse(isInterleaveString("a", "b", "a"))
-//        assertFalse(isInterleaveString("a", "b", "b"))
+        assertTrue(isInterleaveString("a", "b", "ab"))
+        assertTrue(isInterleaveString("a", "b", "ba"))
+        assertFalse(isInterleaveString("a", "b", "a"))
+        assertFalse(isInterleaveString("a", "b", "b"))
         assertFalse(isInterleaveString("db", "b", "cbb"))
     }
 
