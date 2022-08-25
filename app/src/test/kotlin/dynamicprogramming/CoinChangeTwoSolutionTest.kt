@@ -7,9 +7,14 @@ import kotlin.test.assertEquals
 class CoinChangeTwoSolutionTest {
 
     @Test
-    fun testBasicScenario() {
-        val coins = intArrayOf(1, 2, 5)
+    fun testBasicScenarios() {
+        assertEquals(4, CoinChangeTwoSolution.change(5, intArrayOf(1, 2, 5)))
+        assertEquals(0, CoinChangeTwoSolution.change(3, intArrayOf(2)))
+        assertEquals(1, CoinChangeTwoSolution.change(10, intArrayOf(10)))
+    }
 
-        assertEquals(4, CoinChangeTwoSolution.change(5, coins))
+    @Test
+    fun testBoundary() {
+        assertEquals(0, CoinChangeTwoSolution.change(10, intArrayOf()))
     }
 }
