@@ -1,4 +1,4 @@
-package code.wars
+package leetcode
 
 import kotlin.math.*
 

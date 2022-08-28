@@ -1,6 +1,5 @@
 package leetcode
 
-import code.wars.maxProfit
 import org.junit.Assert
 import org.junit.Test
 
