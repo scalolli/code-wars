@@ -1,5 +1,6 @@
 package leetcode
 
+import java.util.TreeSet
 import kotlin.math.abs
 
 object ContainingDuplicatesSolution {
@@ -33,6 +34,22 @@ object ContainingDuplicatesSolution {
                 } else
                     map[nums[n]] = n
             }
+        }
+
+        return false
+    }
+
+    fun containsNearbyAlmostDuplicate(nums: IntArray, k: Int, t: Int): Boolean {
+        val treeSet = TreeSet<Long>()
+
+        for (index in nums.indices) {
+            treeSet.floor(nums[index].toLong())?.let { if (abs(it - nums[index]) <= t) return true }
+            treeSet.ceiling(nums[index].toLong())?.let { if (abs(it - nums[index]) <= t) return true }
+
+            if (treeSet.size > k)
+                treeSet.remove(nums[index - k].toLong())
+            else
+                treeSet.add(nums[index].toLong())
         }
 
         return false
