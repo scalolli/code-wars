@@ -30,5 +30,6 @@ class ContainingDuplicatesSolutionTest {
         assertTrue(containsNearbyAlmostDuplicate(nums = intArrayOf(1, 2, 3, 1), k = 3, t = 0))
         assertFalse(containsNearbyAlmostDuplicate(nums = intArrayOf(1, 5, 9, 1, 5, 9), k = 2, t = 3))
         assertFalse(containsNearbyAlmostDuplicate(nums = intArrayOf(), k = 3, t = 0))
+        assertFalse(containsNearbyAlmostDuplicate(nums = intArrayOf(1, 2), k = 0, t = 1))
     }
 }

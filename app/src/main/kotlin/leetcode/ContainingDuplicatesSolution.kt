@@ -40,16 +40,24 @@ object ContainingDuplicatesSolution {
     }
 
     fun containsNearbyAlmostDuplicate(nums: IntArray, k: Int, t: Int): Boolean {
+        if (k < 1) return false
         val treeSet = TreeSet<Long>()
+        var slidingWindowSize = 0
 
         for (index in nums.indices) {
             treeSet.floor(nums[index].toLong())?.let { if (abs(it - nums[index]) <= t) return true }
             treeSet.ceiling(nums[index].toLong())?.let { if (abs(it - nums[index]) <= t) return true }
 
-            if (treeSet.size > k)
-                treeSet.remove(nums[index - k].toLong())
-            else
+            if (slidingWindowSize >= k) {
+                treeSet.remove(nums[index - slidingWindowSize].toLong())
+                slidingWindowSize -= 1
+            }
+
+            if (!treeSet.contains(nums[index].toLong())) {
                 treeSet.add(nums[index].toLong())
+            }
+
+            slidingWindowSize += 1
         }
 
         return false
