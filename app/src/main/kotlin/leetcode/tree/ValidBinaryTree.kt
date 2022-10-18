@@ -5,16 +5,30 @@ import leetcode.TreeNode
 object ValidBinaryTree {
 
     fun isValidBST(root: TreeNode?): Boolean {
+        val stack = ArrayDeque<TreeNode>()
+        val inOrderTraversal = mutableListOf<Int>()
+        var currentNode: TreeNode?
 
-        fun isValid(node: TreeNode?, leftValue: Int, rightValue: Int): Boolean {
-            if (node == null) return true
+        if (root != null) {
+            currentNode = root
+            while (stack.isNotEmpty() || currentNode != null) {
+                while (currentNode != null) {
+                    stack.add(currentNode)
+                    currentNode = currentNode.left
+                }
 
-            if(!(node.`val` > leftValue && node.`val` <= rightValue))
-                return false
+                val node = stack.removeLast()
+                inOrderTraversal.add(node.`val`)
 
-            return isValid(node.left, leftValue, node.`val`) && isValid(node.right, node.`val`, rightValue)
+                currentNode = node.right
+            }
         }
 
-        return isValid(root, Int.MIN_VALUE, Int.MAX_VALUE)
+        for (i in 0..inOrderTraversal.size - 2) {
+            if (inOrderTraversal[i + 1] <= inOrderTraversal[i])
+                return false
+        }
+
+        return true
     }
 }

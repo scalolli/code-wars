@@ -1,7 +1,6 @@
 package leetcode.tree
 
 import leetcode.TreeNode
-import leetcode.inOrderTraversal
 import leetcode.tree.ValidBinaryTree.isValidBST
 import org.junit.Test
 import kotlin.test.assertFalse
@@ -42,6 +41,6 @@ class ValidBinaryTreeTest {
     @Test
     fun anotherFailingTest() {
         val tree = TreeNode(1, left = TreeNode(1))
-        println(inOrderTraversal(tree))
+        assertFalse(isValidBST(tree))
     }
 }
