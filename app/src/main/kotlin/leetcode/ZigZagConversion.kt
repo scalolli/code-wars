@@ -3,43 +3,21 @@ package leetcode
 fun convert(s: String, numRows: Int): String {
     if (numRows == 1) return s
 
-    val currentString = s.toList()
-    val outputList = mutableListOf<List<Char>>()
-    var rowIndex = -1
-    var columnIndex = 0
-    val emptyChar = '0'
-    var currentColum = mutableListOf<Char>()
-    repeat((0 until numRows).count()) { currentColum.add(emptyChar) }
-    var stringIndex = 0
+    val outputList = mutableListOf<MutableList<Char>>()
+    repeat(numRows) { outputList.add(mutableListOf()) }
 
-    while (stringIndex != s.length) {
-        rowIndex = (rowIndex + 1) % numRows
+    var row = 0
+    var step = -1
 
-        if (columnIndex == 0 || (rowIndex == numRows - columnIndex - 1)) {
-            currentColum[rowIndex] = currentString[stringIndex]
-            stringIndex += 1
-        }
+    for (char in s) {
+        outputList[row] += char
+        if (row == 0)
+            step = 1
+        else if (row == numRows - 1)
+            step = -1
 
-        if (rowIndex == numRows - 1) {
-            outputList.add(currentColum)
-            currentColum = mutableListOf()
-            repeat((0 until numRows).count()) { currentColum.add(emptyChar) }
-            columnIndex = (columnIndex + 1) % (numRows - 1)
-        }
+        row += step
     }
 
-    if (currentColum.isNotEmpty())
-        outputList.add(currentColum)
-
-    val stringBuilder = StringBuilder()
-
-    for (row in 0 until numRows) {
-        for (column in 0 until outputList.size) {
-            if (outputList[column][row] != emptyChar) {
-                stringBuilder.append(outputList[column][row])
-            }
-        }
-    }
-
-    return stringBuilder.toString()
+    return (outputList.map { it.joinToString(separator = "") }).joinToString(separator = "")
 }
