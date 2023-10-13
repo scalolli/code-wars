@@ -1,13 +1,14 @@
 package leetcode
 
 fun twoSum(nums: IntArray, target: Int): IntArray {
-    for (i in nums.indices) {
-        val firstNumber = nums[i]
-        val secondNumber = target - firstNumber
-        val secondNumberIndex = nums.indexOf(secondNumber)
+    val numberToIndex = nums.withIndex().associateBy({ it.value }, { it.index })
 
-        if (secondNumberIndex != -1 && secondNumberIndex != i)
-            return arrayListOf(i, secondNumberIndex).sorted().toIntArray()
+    for ((index, value) in nums.withIndex()) {
+        val secondNumber = target - value
+        if(numberToIndex[secondNumber] != null && numberToIndex[secondNumber] != index) {
+            return intArrayOf(index, numberToIndex[secondNumber]!!)
+        }
+
     }
 
     return intArrayOf()
